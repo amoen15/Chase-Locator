@@ -1,4 +1,4 @@
-package com.neptune.pluto.chase_locater;
+package com.neptune.pluto.chase_locator;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

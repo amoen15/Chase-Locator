@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.hellomaps.MainActivity" >
+
+    <item
+        android:id="@+id/mapTypeNone"
+        android:title="NONE"/>
+    <item
+        android:id="@+id/mapTypeNormal"
+        android:title="NORMAL"/>
+    <item
+        android:id="@+id/mapTypeTerrain"
+        android:title="TERRAIN"/>
+    <item
+        android:id="@+id/mapTypeSatellite"
+        android:title="SATELLITE"/>
+    <item
+        android:id="@+id/mapTypeHybrid"
+        android:title="HYBRID"/>
+
+</menu>
