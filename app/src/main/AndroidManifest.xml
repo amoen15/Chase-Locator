@@ -6,6 +6,10 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+
 
     <permission
         android:name="com.neptune.pluto.chase_locater.permissions.MAPS_RECEIVE"
@@ -35,7 +39,7 @@
 
             <meta-data
                 android:name="com.google.android.maps.v2.API_KEY"
-                android:value="AIzaSyBo-8M3gfMORzY9WyYvnvczgE5EV7axplk" />
+                android:value="AIzaSyD9Eu4KXt2d3mOKmZQ1KVeti9MhWLSJAoM" />
 
 
         </activity>
