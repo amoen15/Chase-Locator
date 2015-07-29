@@ -1,28 +1,69 @@
 package com.neptune.pluto.chase_locater;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.widget.Toast;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity implements OnMapReadyCallback {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
+        public boolean googleServicesAvailable () {
+            int isAvailable = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+            if (isAvailable == ConnectionResult.SUCCESS) {
+                return true;
+            } else if (GooglePlayServicesUtil.isUserRecoverableError(isAvailable)) {
+                Dialog dialog = GooglePlayServicesUtil.getErrorDialog(isAvailable, this, 0);
+                dialog.show();
+            } else {
+                Toast.makeText(this, "Cant connect to play services", Toast.LENGTH_LONG).show();
+            }
+            return false;
+        }
+
+        if(googleServicesAvailable()) {
+            setContentView(R.layout.activity_map);
+            if(initMap()) {
+                Toast.makeText(this, "Perfect - Maps Working", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "Map not available", Toast.LENGTH_LONG).show();
+            }
+        } else {
+            setContentView(R.layout.activity_main);
+        }
+
+
+
+        if(googleServicesAvailable()) {
+            Toast.makeText(this, "Perfect - Maps Working", Toast.LENGTH_LONG).show();
+            setContentView(R.layout.activity_map);
+        }
+
+        private boolean initMap(){
+            if (mGoogleMap == null) {
+                MapFragment mapFrag = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
+                mGoogleMap = mapFrag.getMap();
+            }
+            return (mGoogleMap != null);
+        }
+
+
     }
 
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
 
-
-
-
-
-
-
-
-
-
-
+    }
 
 
 //    @Override
