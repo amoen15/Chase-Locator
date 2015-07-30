@@ -2,6 +2,8 @@ package com.neptune.pluto.chase_locator;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
@@ -12,7 +14,9 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -417,4 +421,48 @@ public class MainActivity extends Activity implements
     public void onProviderDisabled(String provider) {
 
     }
+
+
+    @Override
+    public void onLocationInput() {
+
+        setContentView(R.layout.activity_main);
+
+        ListView chaseLocation = (ListView) findViewById(R.id.listView1);
+        cl = new ProgressDialog(this);
+        cl.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        cl.setMessage("Loading - Please Wait");
+        cl.setIndeterminate(false);
+        cl.setCancelable(false);
+        cl.show();
+
+        Thread myThread = new Thread(new DownloadChaseLocation(this));
+        myThread.start();
+
+
+    }
+
+    public void drawDeals(final ArrayList<Deal> deals){
+        MyAdapter adapter = new MyAdapter(this, deals);
+        grouponDealsList.setAdapter(adapter);
+        pd.dismiss();
+
+        grouponDealsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+                Deal deal = deals.get(position);
+                intent.putExtra("dealItem", deal);
+                startActivity(intent);
+
+            }
+        });
+
+
+    }
+
+
+
 }
